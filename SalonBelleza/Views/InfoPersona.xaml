@@ -2,13 +2,44 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SalonBelleza.Views.InfoPersona"
+             xmlns:local ="clr-namespace:SalonBelleza.ViewModels"
              IconImageSource="mujer.png"
-             Title="Usuario">
+             Title="Cliente">
+
+    <ContentPage.BindingContext>
+
+        <local:ViewModelPersona></local:ViewModelPersona>
+
+    </ContentPage.BindingContext>
+
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Padding="5">
+
+                <Image Source="https://hi5articles.com/wp-content/uploads/2019/11/hair-and-makeup500x334.jpg"/>
+
+                <Label Text="Nombre" FontSize="20"/>
+                <Entry Text="{Binding Nombre}" Keyboard="Text"/>
+
+                <Label Text="Apellido" FontSize="20"/>
+                <Entry Text="{Binding Apellido}" Keyboard="Text"/>
+
+                <Label Text="Celular" FontSize="20"/>
+                <Entry Text="{Binding Celular}" Keyboard="Numeric"/>
+
+                <Label Text="Correo" FontSize="20"/>
+                <Entry Text="{Binding Correo}" Keyboard="Text"/>
+
+                <Button Text="Guardar" Command="{Binding CrearPersona}"/>
+
+                <Button Text="Limpiar" Command="{Binding Limpiar}"/>
+
+                <Label Text="{Binding Guardar}" FontSize="15"/>
+
+            </StackLayout>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

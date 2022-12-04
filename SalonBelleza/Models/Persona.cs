@@ -17,6 +17,12 @@ namespace SalonBelleza.Models
         public ObservableCollection<Cursos> lista_cursos { get; set; } = new ObservableCollection<Cursos>();
         public ObservableCollection<Servicio> lista_servicio { get; set; } = new ObservableCollection<Servicio>();
 
+        public string toString()
+        {
+            return "Nombre: " + nombre + "\n" + "Apellido: " + apellido + "\n" +
+                "Celular: " + celular + "\n" + "Correo electronico: " + correo + "\n\t";
+        }
+
 
     }
 }
