@@ -17,8 +17,6 @@
         <StackLayout>
             <StackLayout Padding="5">
 
-                <Image Source="https://hi5articles.com/wp-content/uploads/2019/11/hair-and-makeup500x334.jpg"/>
-
                 <Label Text="Nombre" FontSize="20"/>
                 <Entry Text="{Binding Nombre}" Keyboard="Text"/>
 
