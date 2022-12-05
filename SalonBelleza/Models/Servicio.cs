@@ -15,7 +15,7 @@ namespace SalonBelleza.Models
         public string toString()
         {
             return "Servicio: " + servicio + "\n" + "Precio del servicio: " + precio + "\n" + 
-                "Fecha: " + fecha.ToString("MM-dd-yyyy") + "\n" + "Hora: " + hora;
+                "Fecha: " + fecha.ToString("MM-dd-yyyy") + "\n" + "Hora: " + hora + "\n\t";
         }
 
     }

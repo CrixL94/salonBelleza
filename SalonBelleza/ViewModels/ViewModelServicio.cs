@@ -10,27 +10,24 @@ using Xamarin.Forms;
 
 namespace SalonBelleza.ViewModels
 {
-    public class ViewModelPersona : INotifyPropertyChanged
+    public class ViewModelServicio : INotifyPropertyChanged
     {
-        public ViewModelPersona()
+        public ViewModelServicio()
         {
-
             AbrirArchivo();
 
-
-            CrearPersona = new Command(() => {
-
-                persona1 = new Persona()
-                {
-
-                    nombre = this.nombre,
-                    apellido = this.apellido,
-                    celular = this.celular,
-                    correo = this.correo,
-
+            CrearServicio = new Command(() =>
+            {
+                Servicio servicio1 = new Servicio() 
+                { 
+                    servicio = this.Servicio,
+                    precio = this.Precio,
+                    fecha = this.Fecha,
+                    hora = this.Hora
                 };
 
-                //Rutina de Serializacion
+                persona1.lista_servicio.Add(servicio1);
+
                 BinaryFormatter formatter = new BinaryFormatter();
                 string ruta = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
                     "info.aut");
@@ -38,26 +35,23 @@ namespace SalonBelleza.ViewModels
                 formatter.Serialize(archivo, persona1);
                 archivo.Close();
 
-                listaPersona.Add(persona1);
-
                 Guardar = "";
-                foreach (Persona tmp in listaPersona)
+
+                foreach (Servicio x in persona1.lista_servicio)
                 {
-
-                    Guardar += tmp.toString() + "\r\n";
+                    Guardar += x.toString() + "\n\t";
                 }
-
             });
 
             Limpiar = new Command(() => {
 
-                listaPersona = new ObservableCollection<Persona>();
+                persona1.lista_servicio = new ObservableCollection<Servicio>();
 
                 BinaryFormatter formatter = new BinaryFormatter();
                 string ruta = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
                     "Ciculos.aut");
                 Stream archivo = new FileStream(ruta, FileMode.Create, FileAccess.Write, FileShare.None);
-                formatter.Serialize(archivo, listaPersona);
+                formatter.Serialize(archivo, persona1.lista_servicio);
                 archivo.Close();
 
                 Guardar = "";
@@ -65,8 +59,13 @@ namespace SalonBelleza.ViewModels
             });
         }
 
+
+
+
         private void AbrirArchivo()
         {
+            // Es una estructura 
+
             try
             {
                 BinaryFormatter formatter = new BinaryFormatter();
@@ -77,12 +76,14 @@ namespace SalonBelleza.ViewModels
                 persona1 = (Persona)formatter.Deserialize(archivo);
                 archivo.Close();
 
-                Nombre = persona1.nombre;
-                Apellido = persona1.apellido;
-                Celular = persona1.celular;
-                Correo = persona1.correo;
+                Guardar = "";
 
-                Guardar += persona1.toString();
+                foreach (Servicio x in persona1.lista_servicio)
+                {
+
+                    Guardar += x.toString();
+
+                }
             }
             catch (Exception e)
             {
@@ -91,63 +92,53 @@ namespace SalonBelleza.ViewModels
             }
         }
 
+        Persona persona1 = new Persona();
 
-            Persona persona1 = new Persona();
-
-        ObservableCollection<Persona> listaPersona = new ObservableCollection<Persona>();
-
-
-
-
-        string nombre;
-        public string Nombre
+        string servicio;
+        public string Servicio
         {
-            get => nombre;
+            get => servicio;
             set
             {
-                nombre = value;
-                var arg = new PropertyChangedEventArgs(nameof(Nombre));
+                servicio = value;
+                var arg = new PropertyChangedEventArgs(nameof(Servicio));
                 PropertyChanged?.Invoke(this, arg);
-
             }
         }
 
-        string apellido;
-        public string Apellido
+        double precio;
+        public double Precio
         {
-            get => apellido;
+            get => precio;
             set
             {
-                apellido = value;
-                var arg = new PropertyChangedEventArgs(nameof(Apellido));
+                precio = value;
+                var arg = new PropertyChangedEventArgs(nameof(Precio));
                 PropertyChanged?.Invoke(this, arg);
-
             }
         }
 
-        double celular;
-        public double Celular
+        DateTime fecha = DateTime.Today;
+        public DateTime Fecha
         {
-            get => celular;
+            get => fecha;
             set
             {
-                celular = value;
-                var arg = new PropertyChangedEventArgs(nameof(Celular));
+                fecha = value;
+                var arg = new PropertyChangedEventArgs(nameof(Fecha));
                 PropertyChanged?.Invoke(this, arg);
-
             }
         }
 
-        string correo;
-        public string Correo
+        TimeSpan hora;
+        public TimeSpan Hora
         {
-            get => correo;
+            get => hora;
             set
             {
-                correo = value;
-                var arg = new PropertyChangedEventArgs(nameof(Correo));
+                hora = value;
+                var arg = new PropertyChangedEventArgs(nameof(Hora));
                 PropertyChanged?.Invoke(this, arg);
-
             }
         }
 
@@ -158,16 +149,14 @@ namespace SalonBelleza.ViewModels
             get => guardar;
             set
             {
-
                 guardar = value;
                 var arg = new PropertyChangedEventArgs(nameof(Guardar));
                 PropertyChanged?.Invoke(this, arg);
-
             }
         }
 
+        public Command CrearServicio { get; }
 
-        public Command CrearPersona { get; }
         public Command Limpiar { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
