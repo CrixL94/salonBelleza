@@ -16,7 +16,7 @@
         <StackLayout>
             <StackLayout Padding="5">
                 <Picker Title="Seleccione Curso" FontSize="20"
-                    TitleColor="White"  SelectedItem="{Binding Servicio}">
+                    TitleColor="White"  SelectedItem="{Binding Curso}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Estilista Profesional</x:String>
@@ -30,12 +30,12 @@
                 <Entry Keyboard="Numeric" Text="{Binding Precio}"/>
 
                 <Label Text="Fecha de Inicio" FontSize="20"></Label>
-                <DatePicker Date="{Binding Fecha}" ></DatePicker>
+                <DatePicker Date="{Binding Fecha}"></DatePicker>
 
                 <Label Text="Tiempo de Duracion" FontSize="20"/>
-                <Entry Text="{Binding Precio}" Keyboard="Text"/>
+                <Entry Text="{Binding Duracion}" Keyboard="Text"/>
 
-                <Button Text="Guardar" Command="{Binding CrearServicio}"></Button>
+                <Button Text="Guardar" Command="{Binding CrearCurso}"></Button>
                 <Button Text="Limpiar" Command="{Binding Limpiar}"/>
 
                 <Label Text="{Binding Guardar}" FontSize="15"/>
