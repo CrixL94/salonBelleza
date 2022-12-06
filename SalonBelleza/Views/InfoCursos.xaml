@@ -2,13 +2,47 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SalonBelleza.Views.InfoCursos"
+             xmlns:local="clr-namespace:SalonBelleza.ViewModels"
              IconImageSource="diploma.png"
              Title="Cursos">
+
+    <ContentPage.BindingContext>
+
+        <local:ViewModelCurso></local:ViewModelCurso>
+
+    </ContentPage.BindingContext>
+    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Padding="5">
+                <Picker Title="Seleccione Curso" FontSize="20"
+                    TitleColor="White"  SelectedItem="{Binding Servicio}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Estilista Profesional</x:String>
+                            <x:String>Acrilismo Profesional</x:String>
+                            <x:String>Maquillaje Profesional</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Label Text="Precio" FontSize="20"/>
+                <Entry Keyboard="Numeric" Text="{Binding Precio}"/>
+
+                <Label Text="Fecha de Inicio" FontSize="20"></Label>
+                <DatePicker Date="{Binding Fecha}" ></DatePicker>
+
+                <Label Text="Tiempo de Duracion" FontSize="20"/>
+                <Entry Text="{Binding Precio}" Keyboard="Text"/>
+
+                <Button Text="Guardar" Command="{Binding CrearServicio}"></Button>
+                <Button Text="Limpiar" Command="{Binding Limpiar}"/>
+
+                <Label Text="{Binding Guardar}" FontSize="15"/>
+
+
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
